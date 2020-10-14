@@ -1,0 +1,39 @@
+resource "aws_vpc" "cus_vpc" {
+	cidr_block = var.my_cidr
+	tags = {
+		Name = "My_custom_VPC"
+	}
+}
+
+resource "aws_subnet" "app" {
+	vpc_id = aws_vpc.cus_vpc.id
+	availability_zone = format("%s%s",var.my_region,var.my_az[0])	
+	cidr_block = cidrsubnet(var.my_cidr,"8","1")
+	tags = {
+		Name = var.my_tags[0]
+	}
+}
+resource "aws_subnet" "web" {
+	vpc_id = aws_vpc.cus_vpc.id
+	availability_zone = format("%s%s",var.my_region,var.my_az[1])
+	cidr_block = cidrsubnet(var.my_cidr,"8","2")
+	tags = {
+		Name = var.my_tags[1]
+	}
+}
+resource "aws_subnet" "db" {
+	vpc_id = aws_vpc.cus_vpc.id
+	availability_zone = format("%s%s",var.my_region,var.my_az[2])
+	cidr_block = cidrsubnet(var.my_cidr,"8","3")
+	tags = {
+		Name = var.my_tags[2]
+	}
+}
+resource "aws_subnet" "mgmt" {
+	vpc_id = aws_vpc.cus_vpc.id
+	availability_zone = format("%s%s",var.my_region,var.my_az[3])
+	cidr_block = cidrsubnet(var.my_cidr,"8","4")
+	tags = {
+		Name = var.my_tags[3]
+	}
+}
