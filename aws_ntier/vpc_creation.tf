@@ -40,3 +40,28 @@ resource "aws_internet_gateway" "my_IGW" {
 		depends_on		= [
 			aws_subnet.subnets ]
 }
+
+
+resource "aws_route_table_association" "public_association" {
+		count			= length(var.pub_subnet_associations)
+		subnet_id		= aws_subnet.subnets[var.pub_subnet_associations[count.index]].id
+		route_table_id 		= aws_route_table.route_table_names[0].id
+}
+resource "aws_route_table_association" "pvt_association" {
+		count			= length(var.pvt_ubnet_associations)
+		subnet_id		= aws_subnet.subnets[var.pvt_ubnet_associations[count.index]].id
+		route_table_id		= aws_route_table.route_table_names[1].id
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

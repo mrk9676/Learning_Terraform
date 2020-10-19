@@ -19,3 +19,13 @@ variable "vpc_routes" {
 	type		= list(string)
 	default		= [ "public", "private" ]
 }
+variable "pub_subnet_associations" {
+	type		= list
+	default		= [0,3,4]
+
+}
+variable "pvt_ubnet_associations" {
+	type		= list
+	default		= [1,2,5,6]
+	
+}
