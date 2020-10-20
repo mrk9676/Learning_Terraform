@@ -53,6 +53,25 @@ resource "aws_route_table_association" "pvt_association" {
 		route_table_id		= aws_route_table.route_table_names[1].id
 }
 
+data "aws_subnet_ids" "selected" {
+		vpc_id                  = aws_vpc.my_vpc.id
+		filter  {
+			name		= "tag:Name"
+			values		= local.group
+		}
+}
+
+resource "aws_db_subnet_group" "db_subnets" {
+		name			= "ntierdbgroup"
+		subnet_ids     		= data.aws_subnet_ids.selected.ids
+		tags			= {
+			Name		= "Ntier-db-group"
+		
+		}
+		
+
+		
+}
 
 
 
