@@ -60,27 +60,3 @@ data "aws_subnet_ids" "selected" {
 			values		= local.group
 		}
 }
-
-resource "aws_db_subnet_group" "db_subnets" {
-		name			= "ntierdbgroup"
-		subnet_ids     		= data.aws_subnet_ids.selected.ids
-		tags			= {
-			Name		= "Ntier-db-group"
-		
-		}
-		
-
-		
-}
-
-
-
-
-
-
-
-
-
-
-
-
